@@ -1,10 +1,13 @@
-global.fetch = require('node-fetch');
-//require("isomorphic-fetch");
+/*
+ * DeployContract.js : This script will deploy a script from contract/helloWorld.scilla to the blockchain
+ */
+
+require("isomorphic-fetch");
 const { Zilliqa } = require("zilliqa-js");
 const fs = require("fs");
 const BN = require("bn.js");
 
-const config = require('./config');
+const config = require('../config');
 const url = config.testurl;
 
 let zilliqa = new Zilliqa({
@@ -32,7 +35,7 @@ console.log(`Connected to ${url}`);
 
 /* Contract specific Parameters */
 
-var code = fs.readFileSync("helloWorld.scilla", "utf-8");
+const code = fs.readFileSync("../contracts/helloWorld.scilla", "utf-8");
 // the immutable initialisation variables
 let initParams = [
     {

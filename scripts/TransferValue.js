@@ -1,7 +1,7 @@
 require('isomorphic-fetch');
 const BN = require('bn.js');
 const { Zilliqa } = require('zilliqa-js');
-const config = require('./config');
+const config = require('../config');
 const url = config.testurl;
 
 const zilliqa = new Zilliqa({

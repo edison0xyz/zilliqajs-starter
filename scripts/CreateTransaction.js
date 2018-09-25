@@ -1,7 +1,10 @@
+/*
+ * CreateTransaction: This script demonstrates how you can invoke another function within the contract. In this case, we are invoking a transition called `setHello` in the smart contract
+ */
 require('isomorphic-fetch');
 const BN = require('bn.js');
 const { Zilliqa } = require('zilliqa-js');
-const config = require('./config');
+const config = require('../config');
 const { argv } = require('yargs');
 const url = config.url;
 
