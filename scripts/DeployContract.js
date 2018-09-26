@@ -8,7 +8,9 @@ const fs = require("fs");
 const BN = require("bn.js");
 
 const config = require('../config');
-const url = config.testurl;
+
+const url = config.local_url;   // Links to KayaRPC
+// const url = config.testnet_url;    // uncomment if using testnet
 
 let zilliqa = new Zilliqa({
     nodeUrl: url
@@ -37,6 +39,7 @@ console.log(`Connected to ${url}`);
 
 const code = fs.readFileSync("../contracts/helloWorld.scilla", "utf-8");
 // the immutable initialisation variables
+
 let initParams = [
     {
         vname: "owner",
@@ -44,6 +47,16 @@ let initParams = [
         value: `0x${address}`
     }
 ];
+
+if (url === config.local_url) {
+    // creation block is required for scilla-runner / KayaRPCs
+    const initCreationBlock = {
+        vname: "_creation_block",
+        type: "BNum",
+        value: "1"
+    }
+    initParams.push(initCreationBlock);
+}
 
 // transaction details
 let txnDetails = {

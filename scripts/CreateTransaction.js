@@ -6,14 +6,14 @@ const BN = require('bn.js');
 const { Zilliqa } = require('zilliqa-js');
 const config = require('../config');
 const { argv } = require('yargs');
-const url = config.url;
+const url = config.local_url;
 
 const zilliqa = new Zilliqa({
   nodeUrl: url,
 });
 
 let privateKey = config.wallet.privateKey;
-let recipient = config.contract.address;
+let contractAddr = config.contract.address;
 
 const address = zilliqa.util.getAddressFromPrivateKey(privateKey);
 const node = zilliqa.getNode();
@@ -50,7 +50,7 @@ const msg = {
 const txnDetails = {
   version: 0,
   nonce: 2,
-  to: recipient,
+  to: contractAddr,
   amount: new BN(0),
   gasPrice: 1,
   gasLimit: 2000,

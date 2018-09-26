@@ -2,7 +2,7 @@ require('isomorphic-fetch');
 const BN = require('bn.js');
 const { Zilliqa } = require('zilliqa-js');
 const config = require('../config');
-const url = config.testurl;
+const url = config.local_url;
 
 const zilliqa = new Zilliqa({
   nodeUrl: url,
@@ -33,9 +33,9 @@ console.log(`Connected to ${url}`);
 // transaction details
 const txnDetails = {
   version: 0,
-  nonce: 2,
+  nonce: 1,
   to: recipient,
-  amount: new BN(100000),
+  amount: new BN(1337),
   gasPrice: 1,
   gasLimit: 2000,
 };
