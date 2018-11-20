@@ -1,13 +1,11 @@
 # zilliqajs-starter
-Starter JS Scripts for Zilliqa
+Starter JS Scripts for Zilliqa. Includes quick scripts to get you started:
+1. Creating Wallet (`SimpleTest.ts`)
+2. Deploy Contract (`DeployContract.ts`)
 
 ## Getting started
-1. Run `cp template_config.js config.js`.
-2. Update your `config.js` files with your addresses and private key. Addresses should __not__ have `0x` prefix.
-  * Correct: `address: 08D419A88BC86E5D84C186A4A7CE21E7DD663685`
-  * Wrong: `address: 0x08D419A88BC86E5D84C186A4A7CE21E7DD663685`
-3. Run the scripts
-    * `node scripts/DeployContract.js`
+1. Run `cp config-base.json config.json`
+2. Run `tsc src/SimpleTest.ts`
 
 If you want to test locally, use [KayaRPC](https://github.com/Zilliqa/kaya)
 
@@ -15,4 +13,3 @@ If you want to test locally, use [KayaRPC](https://github.com/Zilliqa/kaya)
 
 Under the config files, that are some preset settings including privatekey pairs from Kaya RPC's fixture mode.
 To test these scripts quickly, run Kaya RPC using `npm run debug:fixtures`. 
-
