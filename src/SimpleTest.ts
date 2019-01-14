@@ -4,7 +4,7 @@ import { Zilliqa } from '@zilliqa-js/zilliqa';
 import * as zutils from '@zilliqa-js/util';
 import config from '../config.json';
 
-const zilliqa = new Zilliqa('https://api-scilla.zilliqa.com/');
+const zilliqa = new Zilliqa('https://api.zilliqa.com/');
 
 // Populate the wallet with an account
 zilliqa.wallet.addByPrivateKey(config.testAccount.privateKey);

@@ -1,4 +1,5 @@
 (* HelloWorld contract *)
+scilla_version 0
 
 (***************************************************)
 (*               Associated library                *)
