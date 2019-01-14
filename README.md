@@ -1,11 +1,11 @@
 # zilliqajs-starter
-Starter JS Scripts for Zilliqa. Includes quick scripts to get you started:
+Starter Scripts for Zilliqa. Includes quick scripts to get you started:
 1. Creating Wallet (`SimpleTest.ts`)
-2. Deploy Contract (`DeployContract.ts`)
+2. Deploy Contract and invoke transitions (`QuickStart.ts`)
 
 ## Getting started
-1. Run `cp config-base.json config.json`
-2. Run `tsc src/SimpleTest.ts`
+Run `ts-node SimpleTest.ts`. 
+If you do not have `ts-node`, install it using `npm install -g ts-node typescript`.
 
 If you want to test locally, use [KayaRPC](https://github.com/Zilliqa/kaya)
 

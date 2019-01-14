@@ -1,18 +1,17 @@
-const { Transaction } = require('@zilliqa-js/account');
-const { BN, Long } = require('@zilliqa-js/util');
-const { Zilliqa } = require('@zilliqa-js/zilliqa');
-const CP = require ('@zilliqa-js/crypto');
+import { BN, Long } from '@zilliqa-js/util';
+import { Zilliqa } from '@zilliqa-js/zilliqa';
+import * as CP from '@zilliqa-js/crypto';
 
 const zilliqa = new Zilliqa('http://localhost:4200');
 
 //Populate the wallet with an account
-privkey = 'db11cfa086b92497c8ed5a4cc6edb3a5bfe3a640c43ffb9fc6aa0873c56f2ee3';
+const privkey = 'db11cfa086b92497c8ed5a4cc6edb3a5bfe3a640c43ffb9fc6aa0873c56f2ee3';
 
 zilliqa.wallet.addByPrivateKey(
   privkey
 );
 
-add = CP.getAddressFromPrivateKey(privkey);
+const add = CP.getAddressFromPrivateKey(privkey);
 console.log('Your account address is:');
 console.log(`0x${add}`);
 
@@ -34,6 +33,7 @@ async function testBlockchain() {
       }),
     );
     console.log("The transaction status is:");
+    // @ts-ignore
     console.log(tx.receipt);
 
     //Deploy a contract
@@ -135,6 +135,7 @@ async function testBlockchain() {
         gasLimit: Long.fromNumber(2500),
       }
     );
+    console.log(callTx);
 
     //Get the contract state
     const state = await hello.getState();
