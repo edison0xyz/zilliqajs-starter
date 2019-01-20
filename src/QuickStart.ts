@@ -1,12 +1,13 @@
 import { BN, Long, units, bytes } from "@zilliqa-js/util";
 import { Zilliqa } from "@zilliqa-js/zilliqa";
 import * as CP from "@zilliqa-js/crypto";
+import config from '../config.json';
 
 // API endpoint
 const zilliqa = new Zilliqa("http://localhost:4200");
 
 //Populate the wallet with an account
-const privkey = "db11cfa086b92497c8ed5a4cc6edb3a5bfe3a640c43ffb9fc6aa0873c56f2ee3";
+const privkey = config.testAccount.privateKey;
 
 // These are set by the core protocol, and may vary per-chain.
 // These numbers are JUST AN EXAMPLE. They will NOT WORK on the public testnet
