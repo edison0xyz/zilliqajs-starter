@@ -19,16 +19,22 @@ const VERSION = bytes.pack(CHAIN_ID, MSG_VERSION);
 
 zilliqa.wallet.addByPrivateKey(privkey);
 
-const add = CP.getAddressFromPrivateKey(privkey);
+const address = CP.getAddressFromPrivateKey(privkey);
 console.log("Your account address is:");
-console.log(`0x${add}`);
+console.log(`0x${address}`);
 
 async function testBlockchain() {
   try {
     //GetBalance
-    const balance = await zilliqa.blockchain.getBalance(add);
-    console.log("Your account balance is:");
-    console.log(balance.result);
+    const balance = await zilliqa.blockchain.getBalance(address);
+    const minGasPrice = await zilliqa.blockchain.getMinimumGasPrice();
+    console.log(`Your account balance is:`);
+    console.log(balance.result)
+    console.log(`Current Minimum Gas Price: ${minGasPrice.result}`);
+    const myGasPrice = units.toQa('1000', units.Units.Li); // Gas Price that will be used by all transactions
+    console.log(`My Gas Price ${myGasPrice.toString()}`)
+    console.log('Sufficient Gas Price?');
+    console.log(myGasPrice.gte(new BN(minGasPrice.result))); // Checks if your gas price is less than the minimum gas price
 
     //Send a transaction to the network
     const tx = await zilliqa.blockchain.createTransaction(
@@ -36,11 +42,12 @@ async function testBlockchain() {
         version: VERSION,
         toAddr: "573EC96638C8BB1C386394602E1460634F02ADDA",
         amount: new BN(units.toQa("888", units.Units.Zil)), // Sending an amount in Zil (888) and converting the amount to Qa
-        gasPrice: new BN(units.toQa("1000", units.Units.Li)), // Minimum gasPrice veries. Check the `GetMinimumGasPrice` on the blockchain
+        gasPrice: myGasPrice, // Minimum gasPrice veries. Check the `GetMinimumGasPrice` on the blockchain
         gasLimit: Long.fromNumber(1)
       })
     );
-    console.log("The transaction status is:");
+
+    console.log(`The transaction status is:`);
     // @ts-ignore
     console.log(tx.receipt);
 
@@ -108,7 +115,7 @@ async function testBlockchain() {
         // NOTE: all byte strings passed to Scilla contracts _must_ be
         // prefixed with 0x. Failure to do so will result in the network
         // rejecting the transaction while consuming gas!
-        value: `0x${add}`
+        value: `0x${address}`
       }
     ];
 
@@ -118,13 +125,14 @@ async function testBlockchain() {
     // Deploy the contract
     const [deployTx, hello] = await contract.deploy({
       version: VERSION,
-      gasPrice: units.toQa("1000", units.Units.Li),
+      gasPrice: myGasPrice,
       gasLimit: Long.fromNumber(10000)
     });
 
     // Introspect the state of the underlying transaction
-    console.log("Deployment Transaction ID: ", deployTx.id);
-    console.log("Deployment Transaction Receipt: ", deployTx.txParams.receipt);
+    console.log(`Deployment Transaction ID: ${deployTx.id}`);
+    console.log(`Deployment Transaction Receipt:`);
+    console.log(deployTx.txParams.receipt);
 
     // Get the deployed contract address
     console.log("The contract address is:");
@@ -142,7 +150,7 @@ async function testBlockchain() {
         // amount, gasPrice and gasLimit must be explicitly provided
         version: VERSION,
         amount: new BN(0),
-        gasPrice: units.toQa('1000', units.Units.Li),
+        gasPrice: myGasPrice,
         gasLimit: Long.fromNumber(8000),
       }
     );

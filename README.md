@@ -1,7 +1,10 @@
 # zilliqajs-starter
-Starter Scripts for Zilliqa. Includes quick scripts to get you started:
+
+This contains selected code snippets and examples to help you get started in development with Zilliqa Blockchain.
 1. Creating Wallet (`SimpleTest.ts`)
 2. Deploy Contract and invoke transitions (`QuickStart.ts`)
+
+More will be added, so do "watch" this repo for updates.
 
 ## Getting started
 Run `ts-node SimpleTest.ts`. 
